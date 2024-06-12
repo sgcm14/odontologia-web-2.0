@@ -63,6 +63,10 @@ window.addEventListener("load", function () {
           hours = hours ? hours : 12; // the hour '0' should be '12'
           let formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 
+          // Concatenar nombre y apellido del paciente y del odontólogo
+          const pacienteNombreCompleto = `${turno.paciente.nombre} ${turno.paciente.apellido}`;
+          const odontologoNombreCompleto = `${turno.odontologo.nombre} ${turno.odontologo.apellido}`;
+
           //armamos cada columna de la fila
           //como primer columna pondremos el boton modificar
           //luego los datos del turno
@@ -72,10 +76,10 @@ window.addEventListener("load", function () {
             turno.id +
             "</td>" +
             '<td class="td_paciente">' +
-            turno.paciente.id +
+            pacienteNombreCompleto +
             "</td>" +
             '<td class="td_odontologo">' +
-            turno.odontologo.id +
+            odontologoNombreCompleto +
             "</td>" +
             '<td class="td_fechaHoraCita">' +
             formattedDate +
