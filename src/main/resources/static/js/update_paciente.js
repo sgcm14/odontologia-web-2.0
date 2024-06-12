@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
     const formulario = document.querySelector('#update_paciente_form');
 
     formulario.addEventListener('submit', function (event) {
-        let peliculaId = document.querySelector('#id').value;
+        //let pacienteId = document.querySelector('#id').value;
 
         //creamos un JSON que tendrá los datos de la película
         //a diferencia de una pelicula nueva en este caso enviamos el id

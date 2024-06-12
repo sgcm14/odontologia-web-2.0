@@ -6,12 +6,13 @@ window.addEventListener('load', function () {
     const formulario = document.querySelector('#update_odontologo_form');
 
     formulario.addEventListener('submit', function (event) {
-        let peliculaId = document.querySelector('#id').value;
+       // let odontologoId = document.querySelector('#id').value;
 
         //creamos un JSON que tendrá los datos de la película
         //a diferencia de una pelicula nueva en este caso enviamos el id
         //para poder identificarla y modificarla para no cargarla como nueva
         const formData = {
+             id: document.querySelector('#id').value,
              numeroMatricula:document.querySelector('#numeroMatricula').value,
              nombre:document.querySelector('#nombre').value,
              apellido:document.querySelector('#apellido').value
@@ -50,7 +51,7 @@ window.addEventListener('load', function () {
               document.querySelector('#nombre').value = odontologo.nombre;
               document.querySelector('#apellido').value = odontologo.apellido;
               //el formulario por default esta oculto y al editar se habilita
-              document.querySelector('#div_paciente_updating').style.display = "block";
+              document.querySelector('#div_odontologo_updating').style.display = "block";
           }).catch(error => {
               alert("Error: " + error);
           })
