@@ -50,6 +50,18 @@ window.addEventListener("load", function () {
             ')" class="btn btn-info btn_id">' +
             turno.id +
             "</button>";
+          
+          // Formatear fecha y hora para mostrar en el listado
+          let fechaHoraCita = new Date(turno.fechaHoraCita);
+          let day = String(fechaHoraCita.getDate()).padStart(2, "0");
+          let month = String(fechaHoraCita.getMonth() + 1).padStart(2, "0");
+          let year = fechaHoraCita.getFullYear();
+          let hours = fechaHoraCita.getHours();
+          let minutes = String(fechaHoraCita.getMinutes()).padStart(2, "0");
+          let ampm = hours >= 12 ? "p.m." : "a.m.";
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          let formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 
           //armamos cada columna de la fila
           //como primer columna pondremos el boton modificar
@@ -66,7 +78,7 @@ window.addEventListener("load", function () {
             turno.odontologo.id +
             "</td>" +
             '<td class="td_fechaHoraCita">' +
-            turno.fechaHoraCita +
+            formattedDate +
             "</td>" +
             "<td>" +
             updateButton +

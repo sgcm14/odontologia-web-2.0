@@ -49,7 +49,21 @@ function findBy(id) {
       document.querySelector("#id").value = turno.id;
       document.querySelector("#paciente").value = turno.paciente.id;
       document.querySelector("#odontologo").value = turno.odontologo.id;
-      document.querySelector("#fechaHoraCita").value = turno.fechaHoraCita;
+
+      // Convertir la fecha y hora al formato 'YYYY-MM-DDTHH:MM'
+      let fechaHoraCita = new Date(turno.fechaHoraCita);
+      let year = fechaHoraCita.getFullYear();
+      let month = String(fechaHoraCita.getMonth() + 1).padStart(2, "0");
+      let day = String(fechaHoraCita.getDate()).padStart(2, "0");
+      let hours = String(fechaHoraCita.getHours()).padStart(2, "0");
+      let minutes = String(fechaHoraCita.getMinutes()).padStart(2, "0");
+      let fechaHoraFormatted = `${year}-${month}-${day}T${hours}:${minutes}`;
+      document.querySelector("#fechaHoraCita").value = fechaHoraFormatted;
+      /* // Convertir la fecha y hora al formato 'YYYY-MM-DDTHH:MM'
+         let fechaHoraCita = new Date(turno.fechaHoraCita);
+         let fechaHoraFormatted = fechaHoraCita.toISOString().slice(0, 16);
+      document.querySelector("#fechaHoraCita").value = fechaHoraFormatted;*/
+      //document.querySelector("#fechaHoraCita").value = turno.fechaHoraCita;
       //el formulario por default esta oculto y al editar se habilita
       document.querySelector("#div_turno_updating").style.display = "block";
     })

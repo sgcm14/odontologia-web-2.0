@@ -1,7 +1,7 @@
 package clinica.sistemaReservaTurno.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "turnos")
@@ -22,12 +22,12 @@ public class Turno {
    @JoinColumn(name = "odontologo_id",  nullable = false)
     private Odontologo odontologo;
     @Column
-    private LocalDate fechaHoraCita;
+    private LocalDateTime fechaHoraCita;
 
     public Turno() {
     }
 
-    public Turno(Long id, Paciente paciente, Odontologo odontologo, LocalDate fechaHoraCita) {
+    public Turno(Long id, Paciente paciente, Odontologo odontologo, LocalDateTime fechaHoraCita) {
         this.id = id;
         this.paciente = paciente;
         this.odontologo = odontologo;
@@ -48,7 +48,7 @@ public class Turno {
         this.odontologo = odontologo;
     }
 
-    public void setFechaHoraCita(LocalDate fechaHoraCita) {
+    public void setFechaHoraCita(LocalDateTime fechaHoraCita) {
         this.fechaHoraCita = fechaHoraCita;
     }
 
@@ -64,7 +64,7 @@ public class Turno {
         return odontologo;
     }
 
-    public LocalDate getFechaHoraCita() {
+    public LocalDateTime getFechaHoraCita() {
         return fechaHoraCita;
     }
 }
