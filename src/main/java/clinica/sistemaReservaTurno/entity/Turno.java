@@ -1,6 +1,7 @@
 package clinica.sistemaReservaTurno.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,16 +11,12 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   // @OneToOne(cascade = CascadeType.ALL)
-   // @JoinColumn(name = "paciente_id", referencedColumnName = "id")
     @ManyToOne
-    @JoinColumn(name = "paciente_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id", nullable = false)
     private Paciente paciente;
 
-   // @OneToOne(cascade = CascadeType.ALL)
-   //@JoinColumn(name = "odontologo_id", referencedColumnName = "id")
-   @ManyToOne
-   @JoinColumn(name = "odontologo_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "odontologo_id", referencedColumnName = "id", nullable = false)
     private Odontologo odontologo;
     @Column
     private LocalDateTime fechaHoraCita;
@@ -33,7 +30,6 @@ public class Turno {
         this.odontologo = odontologo;
         this.fechaHoraCita = fechaHoraCita;
     }
-
 
 
     public void setId(Long id) {

@@ -1,32 +1,62 @@
 package clinica.sistemaReservaTurno.service;
-
-import clinica.sistemaReservaTurno.entity.Domicilio;
 import clinica.sistemaReservaTurno.entity.Paciente;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import clinica.sistemaReservaTurno.repository.PacienteRepository;
 
-import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class PacienteServiceTest {
 
-    @Autowired
+    @Mock
+    private PacienteRepository pacienteRepository;
+
+    @InjectMocks
     private PacienteService pacienteService;
 
     @Test
-    public void testCrearPaciente(){
-        Domicilio domicilio = new Domicilio("Las Acasias",17,"sjm","lima");
-        // Asegúrate de inicializar correctamente el objeto Domicilio según tu implementación
-        Paciente paciente = new Paciente("Juan", "Perez", "12345678", LocalDate.now(), domicilio, "juan.perez@example.com");
-        pacienteService.guardarPaciente(paciente);
+    void testBuscarTodos() {
+        List<Paciente> pacientes = Arrays.asList(new Paciente(), new Paciente());
+        when(pacienteRepository.findAll()).thenReturn(pacientes);
 
-        Optional<Paciente> pacienteGuardado =  pacienteService.buscarPorID(paciente.getId());
+        List<Paciente> result = pacienteService.buscarTodos();
 
-        assertTrue(pacienteGuardado != null);
+        assertEquals(2, result.size());
     }
 
+    @Test
+    void testGuardarPaciente() {
+        Paciente paciente = new Paciente();
+        when(pacienteRepository.save(paciente)).thenReturn(paciente);
+
+        Paciente result = pacienteService.guardarPaciente(paciente);
+
+        assertEquals(paciente, result);
+    }
+
+    @Test
+    void testBuscarPorID() {
+        Paciente paciente = new Paciente();
+        when(pacienteRepository.findById(1L)).thenReturn(Optional.of(paciente));
+
+        Optional<Paciente> result = pacienteService.buscarPorID(1L);
+
+        assertEquals(Optional.of(paciente), result);
+    }
+
+    @Test
+    void testEliminarPaciente() {
+        pacienteService.eliminarPaciente(1L);
+        verify(pacienteRepository, times(1)).deleteById(1L);
+    }
 }

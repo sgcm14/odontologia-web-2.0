@@ -18,17 +18,17 @@ public class Odontologo {
     @Column
     private String apellido;
 
-    // copie de video
     @OneToMany(mappedBy = "odontologo")
     @JsonIgnore
     private Set<Turno> turnos;
-    public Set <Turno> getTurnos(){
+
+    public Set<Turno> getTurnos() {
         return turnos;
     }
-    public void setTurnos(Set<Turno> turnos){
+
+    public void setTurnos(Set<Turno> turnos) {
         this.turnos = turnos;
     }
-    // copie de video hasta aqui
 
     public Odontologo() {
     }

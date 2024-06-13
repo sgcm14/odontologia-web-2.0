@@ -11,25 +11,30 @@ import java.util.Optional;
 
 @Service
 public class PacienteService {
-   @Autowired
+    @Autowired
     private PacienteRepository pacienteRepository;
 
-    public List<Paciente> buscarTodos(){
+    public List<Paciente> buscarTodos() {
         return pacienteRepository.findAll();
     }
-    public Paciente guardarPaciente(Paciente paciente){
+
+    public Paciente guardarPaciente(Paciente paciente) {
         return pacienteRepository.save(paciente);
     }
-    public void actualizarPaciente(Paciente paciente){
+
+    public void actualizarPaciente(Paciente paciente) {
         pacienteRepository.save(paciente);
     }
-    public Optional<Paciente> buscarPorID(Long id){
+
+    public Optional<Paciente> buscarPorID(Long id) {
         return pacienteRepository.findById(id);
     }
-    public Optional<Paciente> buscarPorEmail(String email){
+
+    public Optional<Paciente> buscarPorEmail(String email) {
         return pacienteRepository.findByEmail(email);
     }
-    public void eliminarPaciente(Long id){
+
+    public void eliminarPaciente(Long id) {
         pacienteRepository.deleteById(id);
     }
 }

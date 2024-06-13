@@ -23,20 +23,20 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    // copie de video
     @OneToMany(mappedBy = "paciente")
     @JsonIgnore
     private Set<Turno> turnos;
+
     public Set<Turno> getTurnos() {
         return turnos;
     }
+
     public void setTurnos(Set<Turno> turnos) {
         this.turnos = turnos;
     }
-// copie de video hasta aqui
 
     public Paciente(String nombre, String apellido, String cedula, LocalDate fechaIngreso, Domicilio domicilio, String email) {
         this.nombre = nombre;
@@ -44,7 +44,7 @@ public class Paciente {
         this.cedula = cedula;
         this.fechaIngreso = fechaIngreso;
         this.domicilio = domicilio;
-        this.email= email;
+        this.email = email;
     }
 
     public Paciente() {
@@ -57,7 +57,7 @@ public class Paciente {
         this.cedula = cedula;
         this.fechaIngreso = fechaIngreso;
         this.domicilio = domicilio;
-        this.email= email;
+        this.email = email;
     }
 
     public Long getId() {
@@ -94,14 +94,6 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", cedula='" + cedula + '\'' +
-                ", fechaIngreso=" + fechaIngreso +
-                ", domicilio=" + domicilio +
-                ", email='" + email + '\'' +
-                '}';
+        return "Paciente{" + "id=" + id + ", nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + ", cedula='" + cedula + '\'' + ", fechaIngreso=" + fechaIngreso + ", domicilio=" + domicilio + ", email='" + email + '\'' + '}';
     }
 }
