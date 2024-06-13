@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SistemaReservaTurnoApplication {
 
 	public static void main(String[] args) {
-		//PropertyConfigurator.configure("log4j.properties");
 		SpringApplication.run(SistemaReservaTurnoApplication.class, args);
 	}
 

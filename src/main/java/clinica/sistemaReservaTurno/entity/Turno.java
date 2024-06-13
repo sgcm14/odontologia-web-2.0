@@ -13,13 +13,13 @@ public class Turno {
    // @OneToOne(cascade = CascadeType.ALL)
    // @JoinColumn(name = "paciente_id", referencedColumnName = "id")
     @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id",nullable = false)
     private Paciente paciente;
 
    // @OneToOne(cascade = CascadeType.ALL)
    //@JoinColumn(name = "odontologo_id", referencedColumnName = "id")
    @ManyToOne
-   @JoinColumn(name = "odontologo_id",  nullable = false)
+   @JoinColumn(name = "odontologo_id", referencedColumnName = "id", nullable = false)
     private Odontologo odontologo;
     @Column
     private LocalDateTime fechaHoraCita;
