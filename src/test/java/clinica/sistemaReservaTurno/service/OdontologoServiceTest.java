@@ -1,62 +1,66 @@
 package clinica.sistemaReservaTurno.service;
-
 import clinica.sistemaReservaTurno.entity.Odontologo;
-import clinica.sistemaReservaTurno.repository.OdontologoRepository;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class OdontologoServiceTest {
 
-@ExtendWith(MockitoExtension.class)
-class OdontologoServiceTest {
-
-    @Mock
-    private OdontologoRepository odontologoRepository;
-
-    @InjectMocks
+    @Autowired
     private OdontologoService odontologoService;
 
     @Test
-    void testBuscarTodos() {
-        List<Odontologo> odontologos = Arrays.asList(new Odontologo(), new Odontologo());
-        when(odontologoRepository.findAll()).thenReturn(odontologos);
+    @Order(1)
+    public void guardarOdontologo() {
+        Odontologo odontologo = new Odontologo("abc123","Armando","Cuadros");
 
-        List<Odontologo> result = odontologoService.buscarTodos();
+        Odontologo odontologoGuardado = odontologoService.guardarOdontologo(odontologo);
 
-        assertEquals(2, result.size());
+        assertEquals(1L,odontologoGuardado.getId());
     }
 
     @Test
-    void testGuardarOdontologo() {
-        Odontologo odontologo = new Odontologo();
-        when(odontologoRepository.save(odontologo)).thenReturn(odontologo);
+    @Order(2)
+    public void buscarPorID() {
+        Long id= 1L;
+        Optional<Odontologo> odontologoBuscado = odontologoService.buscarPorID(id);
 
-        Odontologo result = odontologoService.guardarOdontologo(odontologo);
-
-        assertEquals(odontologo, result);
+        assertNotNull(odontologoBuscado.get());
     }
 
     @Test
-    void testBuscarPorID() {
-        Odontologo odontologo = new Odontologo();
-        when(odontologoRepository.findById(1L)).thenReturn(Optional.of(odontologo));
-
-        Optional<Odontologo> result = odontologoService.buscarPorID(1L);
-
-        assertEquals(Optional.of(odontologo), result);
+    @Order(3)
+    public void actualizarOdontologoTest(){
+        Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorID(1L);
+        if(odontologoBuscado.isPresent()){
+            odontologoBuscado.get().setApellido("Fernandez");
+        }
+        odontologoService.actualizarOdontologo(odontologoBuscado.get());
+        assertEquals("Fernandez",odontologoBuscado.get().getApellido());
     }
 
     @Test
-    void testEliminarOdontologo() {
+    @Order(4)
+    public void buscarTodos() {
+        List<Odontologo> odontologos = odontologoService.buscarTodos();
+        assertEquals(1, odontologos.size());
+    }
+
+    @Test
+    @Order(5)
+    public void eliminarOdontologo() {
         odontologoService.eliminarOdontologo(1L);
-        verify(odontologoRepository, times(1)).deleteById(1L);
+        Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorID(1L);
+        assertFalse(odontologoBuscado.isPresent());
     }
 }

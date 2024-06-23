@@ -1,5 +1,4 @@
 package clinica.sistemaReservaTurno.controller;
-
 import clinica.sistemaReservaTurno.entity.Odontologo;
 import clinica.sistemaReservaTurno.entity.Paciente;
 import clinica.sistemaReservaTurno.entity.Turno;

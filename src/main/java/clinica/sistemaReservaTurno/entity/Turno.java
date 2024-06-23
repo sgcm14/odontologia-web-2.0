@@ -31,6 +31,11 @@ public class Turno {
         this.fechaHoraCita = fechaHoraCita;
     }
 
+    public Turno(Paciente paciente, Odontologo odontologo, LocalDateTime fechaHoraCita) {
+        this.paciente = paciente;
+        this.odontologo = odontologo;
+        this.fechaHoraCita = fechaHoraCita;
+    }
 
     public void setId(Long id) {
         this.id = id;

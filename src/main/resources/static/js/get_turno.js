@@ -85,11 +85,11 @@ window.addEventListener("load", function () {
             formattedDate +
             "</td>" +
             "<td>" +
-            updateButton +
-            "</td>" +
+            updateButton + deleteButton
+            "</td>"/* +
             "<td>" +
             deleteButton +
-            "</td>";
+            "</td>";*/
         }
       });
   })(function () {

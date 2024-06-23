@@ -1,5 +1,4 @@
 package clinica.sistemaReservaTurno.controller;
-
 import clinica.sistemaReservaTurno.entity.Odontologo;
 import clinica.sistemaReservaTurno.exception.ResourceNotFoundException;
 import clinica.sistemaReservaTurno.service.OdontologoService;

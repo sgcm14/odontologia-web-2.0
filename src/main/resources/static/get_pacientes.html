@@ -26,9 +26,9 @@
     <script type="text/javascript" src="/js/delete_paciente.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="./index.html">Home</a>
+        <a class="navbar-brand" href="home_admin.html">Home</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -63,7 +63,6 @@
                     >Listar</a
                   >
                 </li>
-                <li><hr class="dropdown-divider" /></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -87,7 +86,6 @@
                     >Listar</a
                   >
                 </li>
-                <li><hr class="dropdown-divider" /></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -107,17 +105,17 @@
                 <li>
                   <a class="dropdown-item" href="./get_turnos.html">Listar</a>
                 </li>
-                <li><hr class="dropdown-divider" /></li>
               </ul>
             </li>
           </div>
         </div>
+        <a class="btn btn-outline-danger" href="/logout">Log Out</a>
       </div>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
       <div id="div_paciente_table">
         <h1>Listado de Pacientes</h1>
-        <div class="row col-md-6 table-responsive">
+        <div class="row col-md-12 table-responsive">
           <table id="pacienteTable" class="table table-striped">
             <thead>
               <tr>
@@ -131,7 +129,7 @@
                 <th>Localidad</th>
                 <th>Provincia</th>
                 <th>Email</th>
-                <th></th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody id="pacienteTableBody"></tbody>
@@ -143,9 +141,7 @@
           class="col-sm-6"
           style="
             display: none;
-            background-color: #e6fffa;
             padding: 10px;
-            border-radius: 3px;
           "
           id="div_paciente_updating"
         >
@@ -255,7 +251,6 @@
           <div id="response" style="display: none; margin: 10px"></div>
         </div>
       </div>
-      <hr />
     </div>
   </body>
 </html>

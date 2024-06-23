@@ -88,6 +88,10 @@ public class Paciente {
         this.id = id;
     }
 
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public String getEmail() {
         return email;
     }

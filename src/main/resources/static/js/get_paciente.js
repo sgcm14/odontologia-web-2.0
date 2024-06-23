@@ -87,11 +87,11 @@ window.addEventListener("load", function () {
             paciente.email.toUpperCase() +
             "</td>" +
             "<td>" +
-            updateButton +
-            "</td>" +
+            updateButton + deleteButton
+            "</td>"/* +
             "<td>" +
             deleteButton +
-            "</td>";
+            "</td>";*/
         }
       });
   })(function () {
