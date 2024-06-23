@@ -4,10 +4,8 @@ import clinica.sistemaReservaTurno.service.UsuarioDetalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -28,29 +26,17 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
-                   // registry.requestMatchers("/home", "/register/**", "/h2-console/**", "/odontologos/**", "/pacientes/**").permitAll();
-                    registry.requestMatchers("/register/**", "/h2-console/**").permitAll();
-                    //registry.requestMatchers("/admin/**").hasRole("ADMIN");
-                    //registry.requestMatchers("/user/**").hasRole("USER");
+                    registry.requestMatchers("/register/**", "/h2-console/**","/odontologos/**", "/pacientes/**","/turnos/**", "/registro.html", "/js/**").permitAll();
                     registry.requestMatchers("/home_admin.html", "/get_pacientes.html", "/post_pacientes.html", "/get_odontologos.html", "/post_odontologos.html", "/get_turnos.html", "/post_turnos.html").hasRole("ADMIN");
                     registry.requestMatchers("/home_user.html","/get_turnos_user.html", "/post_turnos_user.html").hasRole("USER");
                     registry.anyRequest().authenticated();
                 })
-
                 //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .formLogin(httpSecurityFormLoginConfigurer -> {
                     httpSecurityFormLoginConfigurer
                             .successHandler(new AuthenticationSucessHandler())
                             .permitAll();
                 })
-                /*.formLogin(Customizer.withDefaults())
-                .logout(Customizer.withDefaults())*/
-                /*.formLogin(httpSecurityFormLoginConfigurer -> {
-                     httpSecurityFormLoginConfigurer
-                             .loginPage("/login")
-                             .successHandler(new AuthenticationSucessHandler())
-                             .permitAll();
-                 })*/
                 .build();
     }
 
