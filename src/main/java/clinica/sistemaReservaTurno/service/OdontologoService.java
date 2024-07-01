@@ -29,6 +29,10 @@ public class OdontologoService {
         return odontologoRepository.findById(id);
     }
 
+    public Optional<Odontologo> buscarPorMatricula(String matricula) {
+        return odontologoRepository.findByNumeroMatricula(matricula);
+    }
+
     public void eliminarOdontologo(Long id) {
         odontologoRepository.deleteById(id);
     }

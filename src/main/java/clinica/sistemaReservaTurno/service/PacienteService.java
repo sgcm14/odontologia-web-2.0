@@ -34,6 +34,10 @@ public class PacienteService {
         return pacienteRepository.findByEmail(email);
     }
 
+    public Optional<Paciente> buscarPorCedula(String cedula) {
+        return pacienteRepository.findByCedula(cedula);
+    }
+
     public void eliminarPaciente(Long id) {
         pacienteRepository.deleteById(id);
     }

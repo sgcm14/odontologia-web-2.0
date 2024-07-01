@@ -28,7 +28,7 @@ public class UsuarioDetalleService implements UserDetailsService {
                     .roles(getRoles(userObj))
                     .build();
         } else {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException("No existe el usuario: " + username);
         }
     }
 

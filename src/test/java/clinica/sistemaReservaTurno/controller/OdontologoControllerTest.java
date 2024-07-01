@@ -12,9 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -38,7 +39,7 @@ class OdontologoControllerTest {
         MvcResult respuesta = mockMvc.perform(MockMvcRequestBuilders.get("/odontologos")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andReturn();
 
         assertFalse(respuesta.getResponse().getContentAsString().isEmpty());
@@ -46,13 +47,13 @@ class OdontologoControllerTest {
 
     @Test
     public void guardarOdontologo() throws Exception {
-        Odontologo odontologo = new Odontologo("MP05", "Diego", "Torres");
+        Odontologo odontologo = new Odontologo("MP105", "Diego", "Torres");
 
         MvcResult respuesta = mockMvc.perform(MockMvcRequestBuilders.post("/odontologos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(odontologo)))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andReturn();
 
         assertFalse(respuesta.getResponse().getContentAsString().isEmpty());
@@ -61,23 +62,20 @@ class OdontologoControllerTest {
     @Test
     public void actualizarOdontologo() throws Exception {
 
-        Odontologo odontologoExistente = new Odontologo("MP30", "Carlos", "Lopez");
+        Odontologo odontologoExistente = new Odontologo("MP40", "Carlos", "Lopez");
 
         Odontologo odontologoGuardado = odontologoService.guardarOdontologo(odontologoExistente);
 
-        Odontologo odontologoActualizado = new Odontologo("MP30", "Carlos", "Lopez Actualizado");
-
-        odontologoActualizado.setId(odontologoGuardado.getId());
+        Odontologo odontologoActualizado = new Odontologo(odontologoGuardado.getId(),"MP40", "Carlos", "Lopez Actualizado");
 
 
         MvcResult respuesta = mockMvc.perform(MockMvcRequestBuilders.put("/odontologos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(odontologoActualizado)))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andReturn();
-
-        assertTrue(respuesta.getResponse().getContentAsString().contains("odontologo actualizado"));
+        assertTrue(respuesta.getResponse().getContentAsString().contains("Odontologo actualizado"));
 
         Odontologo odontologoVerificado = odontologoService.buscarPorID(odontologoGuardado.getId()).orElse(null);
         assertTrue(odontologoVerificado != null && "Lopez Actualizado".equals(odontologoVerificado.getApellido()));
@@ -92,7 +90,7 @@ class OdontologoControllerTest {
         MvcResult respuesta = mockMvc.perform(MockMvcRequestBuilders.get("/odontologos/{id}", odontologoGuardado.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andReturn();
 
         Odontologo odontologoEncontrado = objectMapper.readValue(respuesta.getResponse().getContentAsString(), Odontologo.class);
@@ -113,7 +111,7 @@ class OdontologoControllerTest {
         MvcResult respuesta = mockMvc.perform(MockMvcRequestBuilders.delete("/odontologos/eliminar/{id}", odontologoGuardado.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andReturn();
 
         assertTrue(respuesta.getResponse().getContentAsString().contains("odontologo eliminado con exito"));

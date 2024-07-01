@@ -85,11 +85,11 @@ public class TurnoControllerTest {
     @Test
     public void actualizarTurno() throws Exception {
         Domicilio domicilioPaciente = new Domicilio("Calle Falsa", 123, "Springfield", "USA");
-        Paciente paciente = new Paciente("Juan", "Perez", "12345678", LocalDate.now(), domicilioPaciente, "juanperez@example.com");
+        Paciente paciente = new Paciente("Jaime", "Perez", "1234567", LocalDate.now(), domicilioPaciente, "jaimeperez@example.com");
 
         pacienteService.guardarPaciente(paciente);
 
-        Odontologo odontologo = new Odontologo("MP10", "Ivan", "Bustamante");
+        Odontologo odontologo = new Odontologo("MP05", "Ivan", "Jimenez");
 
         odontologoService.guardarOdontologo(odontologo);
 

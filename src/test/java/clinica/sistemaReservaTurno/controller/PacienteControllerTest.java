@@ -17,7 +17,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -86,7 +87,7 @@ class PacienteControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
-        assertTrue(respuesta.getResponse().getContentAsString().contains("paciente actualizado"));
+        assertTrue(respuesta.getResponse().getContentAsString().contains("Paciente actualizado"));
 
         Paciente pacienteVerificado = pacienteService.buscarPorID(pacienteGuardado.getId()).orElse(null);
         assertTrue(pacienteVerificado != null && "Calle Actualizada".equals(pacienteVerificado.getDomicilio().getCalle()));
